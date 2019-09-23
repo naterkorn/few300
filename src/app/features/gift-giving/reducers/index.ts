@@ -39,8 +39,10 @@ const selectHolidayListItemsUnfiltered = createSelector(selectHolidayArray, holi
   } as HolidayListItem))
 );
 
-export const selectHolidayListSorted = createSelector(
-  selectHolidayListItemsUnfiltered, selectSortingHolidaysBy, (list, by) => {
+const selectHolidayListSorted = createSelector(selectHolidayListItemsUnfiltered, selectSortingHolidaysBy,
+  // This sorting method will place uppercase letters ahead of lowercase letters when
+  // sorting by name whoops lol, should really do a .toUpper() or some such.
+  (list, by) => {
     return [...list.sort((lhs, rhs) => {
       if (lhs[by] < rhs[by]) {
         return -1;
@@ -52,8 +54,6 @@ export const selectHolidayListSorted = createSelector(
     })];
   }
 );
-
-export const selectHolidayListItems = createSelector(
-  selectShowAllHolidays, selectHolidayListItemsUnfiltered, (all, holidays) =>
+export const selectHolidayListItems = createSelector(selectShowAllHolidays, selectHolidayListSorted, (all, holidays) =>
   holidays.filter(h => all ? true : !h.past)
 );
