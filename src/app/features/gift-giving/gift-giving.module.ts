@@ -5,6 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { HolidaysComponent } from './containers/holidays/holidays.component';
 import { FriendsComponent } from './containers/friends/friends.component';
+import { ListComponent as FriendsListComponent } from './containers/friends/list/list.component';
+import { EntryComponent as FriendsEntryComponent } from './containers/friends/entry/entry.component';
+
 import { reducers, featureName } from './reducers';
 import { StoreModule } from '@ngrx/store';
 import { ListComponent } from './containers/holidays/list/list.component';
@@ -49,7 +52,9 @@ const routes: Routes = [
     FriendsComponent,
     ListComponent,
     EntryComponent,
-    SortFilterComponent
+    SortFilterComponent,
+    FriendsEntryComponent,
+    FriendsListComponent
   ],
   imports: [
     CommonModule,
