@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { GiftGivingState } from '../../../reducers';
-import { addFriend } from '../../../actions/friends.actions';
+import { friendAdded } from '../../../actions/friends.actions';
 
 @Component({
   selector: 'app-friends-entry',
@@ -17,7 +17,7 @@ export class EntryComponent implements OnInit {
 
   addItem(friendNameEl: HTMLInputElement) {
     const name = friendNameEl.value;
-    this.store.dispatch(addFriend({ name }));
+    this.store.dispatch(friendAdded({ name }));
     friendNameEl.value = '';
     friendNameEl.focus();
   }

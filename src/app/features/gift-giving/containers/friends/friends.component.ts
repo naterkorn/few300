@@ -3,6 +3,7 @@ import { FriendEntity } from '../../reducers/friends.reducer';
 import { Observable } from 'rxjs';
 import { GiftGivingState, selectFriendsList } from '../../reducers';
 import { Store } from '@ngrx/store';
+import { loadFriendData } from '../../actions/friends.actions';
 
 @Component({
   selector: 'app-friends',
@@ -15,6 +16,7 @@ export class FriendsComponent implements OnInit {
   constructor(private store: Store<GiftGivingState>) { }
 
   ngOnInit() {
+    this.store.dispatch(loadFriendData());
     this.friends$ = this.store.select(selectFriendsList);
   }
 }

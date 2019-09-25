@@ -7,8 +7,9 @@ import { HolidayEntity } from '../reducers/holidays.reducer';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FriendEntity } from '../reducers/friends.reducer';
+
 @Injectable()
-export class HolidaysEffects {
+export class FriendsEffects {
 
   postFriend$ = createEffect(() =>
     this.actions$.pipe(
@@ -29,7 +30,7 @@ export class HolidaysEffects {
       switchMap(() => this.client.get<{ friends: FriendEntity[] }>(environment.friendsUrl)
         .pipe(
           map(response => response.friends),
-          map(holidays => friendsActions.loadFriendsSucceeded({ data: friends }))
+          map(friends => friendsActions.loadFriendsSuccess({ data: friends }))
         )
       )
     )

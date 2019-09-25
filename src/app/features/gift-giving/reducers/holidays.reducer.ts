@@ -28,7 +28,6 @@ const reducerFunction = createReducer(
     return adapter.addOne(action.newEntity, tempState);
   }),
   on(actions.holidayAddedFailure, (state, action) => adapter.removeOne(action.entity.id, state))
-
 );
 
 export function reducer(state: HolidayState = initialState, action: Action) {

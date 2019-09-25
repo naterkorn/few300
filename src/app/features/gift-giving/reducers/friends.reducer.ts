@@ -20,7 +20,13 @@ const initialState = adapter.getInitialState();
 
 const reducerFunction = createReducer(
   initialState,
-  on(actions.addFriend, (state, action) => adapter.addOne(action.entity, state))
+  on(actions.friendAdded, (state, action) => adapter.addOne(action.entity, state)),
+  on(actions.loadFriendsSuccess, (state, action) => adapter.addAll(action.data, state)),
+  on(actions.friendAddedSuccess, (state, action) => {
+    const tempState = adapter.removeOne(action.oldId, state);
+    return adapter.addOne(action.newEntity, tempState);
+  }),
+  on(actions.friendAddedFailure, (state, action) => adapter.removeOne(action.entity.id, state))
 );
 
 export function reducer(state: FriendsState = initialState, action: Action) {
